@@ -1,0 +1,1 @@
+int isDigitoVerificadorValido(int identificador);
