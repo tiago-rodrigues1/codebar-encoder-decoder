@@ -2,22 +2,35 @@
 
 #include "../include/codebar.h"
 
-int isDigitoVerificadorValido(int identificador) {
-    int soma = 0, divisor = 10000000, aux = identificador, digito = 4;
+void decompoeIdentificador(int identificador, int arr[TAM_VERIFICADOR]) {
+    int divisor = 10000000, aux = identificador, digito = 0;
 
-    for (int i = 1; i <= 7; i++) {
+    for (int i = 0; i < TAM_VERIFICADOR; i++) {
+        digito = aux / divisor;
+        aux -= digito * divisor;
+
+        arr[i] = digito;
+        divisor /= 10;
+    }
+}
+
+int isDigitoVerificadorValido(int identificador) {
+    int soma = 0;
+    int numerosIdentificador[TAM_VERIFICADOR];
+
+    decompoeIdentificador(identificador, numerosIdentificador);
+
+    for (int i = 0; i < 7; i++) {
         int peso = 3;
 
-        if (i % 2 == 0) {
+        if ((i + 1) % 2 == 0) {
             peso = 1;
         }
 
-        digito = aux / divisor;
-        aux -= digito * divisor;
-        divisor /= 10;
-
-        soma += peso * digito;
+        soma += peso * numerosIdentificador[i];
     }
+
+    printf("%d\n", soma);
 
     int multiploDe10;
 
@@ -28,7 +41,7 @@ int isDigitoVerificadorValido(int identificador) {
     }
 
     int digitoVerificadorCorreto = multiploDe10 - soma;
+    int ultimoDigito = numerosIdentificador[TAM_VERIFICADOR - 1];
 
-    // aux agora representa o último digito
-    return digitoVerificadorCorreto == aux;
+    return digitoVerificadorCorreto == ultimoDigito;
 }
