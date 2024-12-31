@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include <string.h>
-
 #include "../include/codebar.h"
 
 char tabelaRightCode[10][8] = {
@@ -57,8 +55,6 @@ int isDigitoVerificadorValido(int identificador) {
         soma += peso * numerosIdentificador[i];
     }
 
-    printf("%d\n", soma);
-
     int multiploDe10;
 
     if (soma % 10 == 0) {
@@ -77,7 +73,7 @@ void getBinario(int identificador, char stringBinario[TAM_CODIGO_DE_BARRAS]) {
     int numerosIdentificador[TAM_VERIFICADOR];
     decompoeIdentificador(identificador, numerosIdentificador);
 
-    char codigoDeBarras[TAM_CODIGO_DE_BARRAS];
+    char codigoDeBarras[TAM_CODIGO_DE_BARRAS] = "";
     char marcadorInicioFim[4] = "101\0";
     char marcadorCentral[6] = "01010\0";
 
