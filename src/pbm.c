@@ -1,8 +1,22 @@
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "../include/pbm.h"
+
+int arquivoExiste(char *path) {
+    FILE *arquivo;
+    arquivo = fopen(path, "r");
+
+    int existe = arquivo != NULL;
+
+    if (existe) {
+        fclose(arquivo);
+    }
+    
+    return existe;
+}
 
 void gerarPBM(CodigoDeBarras *codigo) {
     int larguraCodigo = codigo->pxPorArea * TAM_CODIGO_DE_BARRAS;
@@ -10,7 +24,7 @@ void gerarPBM(CodigoDeBarras *codigo) {
     int alturaTotal = codigo->pxAltura + (2 * codigo->pxMargem);
 
     FILE *pbm;
-    pbm = fopen("codigo.pbm", "w");
+    pbm = fopen(codigo->nome, "w");
 
     fprintf(pbm, "%s\n%d %d\n", "P1", larguraTotal, alturaTotal);
 

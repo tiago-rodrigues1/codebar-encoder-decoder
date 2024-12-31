@@ -4,4 +4,5 @@
 #define OUTPUT_PATH "/output/"
 #endif
 
+int arquivoExiste(char *path);
 void gerarPBM(CodigoDeBarras *codigo);
