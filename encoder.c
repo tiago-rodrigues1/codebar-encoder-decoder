@@ -1,46 +1,82 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
-#define TAM 8
 
 #include "include/codebar.h"
 #include "include/pbm.h"
 
+void usage() {
+    printf("\nModo de uso:\n");
+    printf("\n$ ./encoder <identificador> -m <margem_lateral> -p <pixel_por_area> -a <altura_do_codigo> -n <nome_do_arquivo> \n\n");
+    printf("-m............Margem lateral, em px (opcional)\n");
+    printf("-p............Pixel por área do código (opcional)\n");
+    printf("-a............Altura do códgido em pixels (opcional)\n");
+    printf("-n............Nome do arquivo do código de barras (opcional)\n");
+    printf("-h............Ver modo de uso (opcional)\n");
+}
 
-int main(void) {
-    char codigo[TAM];
-    int i;
-//pedir codigo
-    printf("Digite o código: \n ");
-    scanf("%s", codigo);
 
-//verificar se tem algo q n é numero
-
-    for (i = 0; codigo[i] != '\0'; i++) {
-        if (!isdigit(codigo[i])) { 
-            printf("Há caractere inválido");          
-            break;                 
-        }
-    }
-//verificar se está lendo ok
-    //printf("O código é esse: %s", codigo);
-    
-//verificar se tem a quantidade certa de caracteres (8)
+int main(int argc, char* argv[]) {
     CodigoDeBarras c;
 
-    c.identificador = 40170725;
-    c.pxPorArea = 3;
+    // Valores padrão
     c.pxMargem = 8;
+    c.pxPorArea = 3;
     c.pxAltura = 180;
+    c.nome = "codigo.pbm";
 
-    c.nome = "teste.pbm";
+    if (strcmp(argv[1], "-h") == 0) {
+        usage();
+        exit(-1);
+    } else {
+        int resultado = isIdentificadorValido(argv[1]);
+
+        if (resultado == 0) {
+            usage();
+            exit(-1);
+        } else {
+            c.identificador = resultado;
+        }
+    }
+
+    for (int i = 2; i < argc; i++) {
+        if (strcmp(argv[i], "-m") == 0 && i + 1 < argc) {
+            c.pxMargem = atoi(argv[i + 1]);
+            i++;
+        }
+
+        if (strcmp(argv[i], "-p") == 0 && i + 1 < argc) {
+            c.pxPorArea = atoi(argv[i + 1]);
+            i++;
+        }
+
+        if (strcmp(argv[i], "-a") == 0 && i + 1 < argc) {
+            c.pxAltura = atoi(argv[i + 1]);
+            i++;
+        }
+
+        if (strcmp(argv[i], "-n") == 0 && i + 1 < argc) {
+            c.nome = argv[i + 1];
+            i++;
+        }
+
+        if (strcmp(argv[i], "-h") == 0) {
+            usage();
+            exit(-1);
+        }
+    }
+
+    printf("%d\n", c.identificador);
+    printf("%d\n", c.pxMargem);
+    printf("%d\n", c.pxPorArea);
+    printf("%d\n", c.pxAltura);
+    printf("%s\n", c.nome);
     
     char binario[TAM_CODIGO_DE_BARRAS];
     getBinario(c.identificador, binario);
+    strcpy(c.binario, binario);
 
     printf("%s\n", binario);
-
-    strcpy(c.binario, binario);
 
     gerarPBM(&c);
     
