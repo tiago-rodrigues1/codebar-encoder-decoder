@@ -1,3 +1,6 @@
+#include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "../include/codebar.h"
 
@@ -27,10 +30,10 @@ char tabelaLeftCode[10][8] = {
     "0001011\0", // 9
 };
 
-void decompoeIdentificador(int identificador, int arr[TAM_VERIFICADOR]) {
+void decompoeIdentificador(int identificador, int arr[TAM_IDENTIFICADOR]) {
     int divisor = 10000000, aux = identificador, digito = 0;
 
-    for (int i = 0; i < TAM_VERIFICADOR; i++) {
+    for (int i = 0; i < TAM_IDENTIFICADOR; i++) {
         digito = aux / divisor;
         aux -= digito * divisor;
 
@@ -41,7 +44,7 @@ void decompoeIdentificador(int identificador, int arr[TAM_VERIFICADOR]) {
 
 int isDigitoVerificadorValido(int identificador) {
     int soma = 0;
-    int numerosIdentificador[TAM_VERIFICADOR];
+    int numerosIdentificador[TAM_IDENTIFICADOR];
 
     decompoeIdentificador(identificador, numerosIdentificador);
 
@@ -64,13 +67,38 @@ int isDigitoVerificadorValido(int identificador) {
     }
 
     int digitoVerificadorCorreto = multiploDe10 - soma;
-    int ultimoDigito = numerosIdentificador[TAM_VERIFICADOR - 1];
+    int ultimoDigito = numerosIdentificador[TAM_IDENTIFICADOR - 1];
 
     return digitoVerificadorCorreto == ultimoDigito;
 }
 
+int isIdentificadorValido(char *identificador) {
+    int i = 0;
+
+    for (i = 0; identificador[i] != '\0'; i++) {
+        if (!isdigit(identificador[i])) { 
+            printf("[ERRO] Todos os carecteres do identificador devem ser numéricos\n");
+            return 0;
+        }
+    }
+
+    if (i != TAM_IDENTIFICADOR) {
+        printf("[ERRO] O identificador deve ter exatamente 8 dígitos\n");
+        return 0;
+    }
+
+    int numIdentificador = atoi(identificador);
+
+    if (!isDigitoVerificadorValido(numIdentificador)) {
+        printf("[ERRO] O dígito verificador não é válido\n");
+        return 0;
+    }
+    
+    return numIdentificador;
+}
+
 void getBinario(int identificador, char stringBinario[TAM_CODIGO_DE_BARRAS]) {
-    int numerosIdentificador[TAM_VERIFICADOR];
+    int numerosIdentificador[TAM_IDENTIFICADOR];
     decompoeIdentificador(identificador, numerosIdentificador);
 
     char codigoDeBarras[TAM_CODIGO_DE_BARRAS] = "";
@@ -79,7 +107,7 @@ void getBinario(int identificador, char stringBinario[TAM_CODIGO_DE_BARRAS]) {
 
     strcat(codigoDeBarras, marcadorInicioFim);
 
-    for (int i = 0; i < TAM_VERIFICADOR; i++) {
+    for (int i = 0; i < TAM_IDENTIFICADOR; i++) {
         int digito = numerosIdentificador[i];
         char binario[8];
 

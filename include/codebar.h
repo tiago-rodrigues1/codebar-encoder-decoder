@@ -1,5 +1,5 @@
-#ifndef TAM_VERIFICADOR
-#define TAM_VERIFICADOR 8
+#ifndef TAM_IDENTIFICADOR
+#define TAM_IDENTIFICADOR 8
 #endif
 
 #ifndef TAM_CODIGO_DE_BARRAS
@@ -19,4 +19,5 @@ typedef struct codigo {
 #endif
 
 int isDigitoVerificadorValido(int identificador);
+int isIdentificadorValido(char *identificador);
 void getBinario(int identificador, char stringBinario[TAM_CODIGO_DE_BARRAS]);
