@@ -18,6 +18,31 @@ int arquivoExiste(char *path) {
     return existe;
 }
 
+int pbmValido(char *path){
+    FILE *arquivo;
+    arquivo = fopen(path, "r");
+    char *tipo, *stringLargura, *stringAltura;
+    
+    fscanf(arquivo, "%s", tipo);
+    fscanf(arquivo, "%s %s", stringLargura, stringAltura);
+
+    if (strcmp(tipo,"P1") != 0){
+        printf("[ERRO] PBM inválido");
+        return 0; //0 falso
+    }
+
+    int largura = atoi(stringLargura);
+    int altura = atoi(stringAltura);
+    
+    if (largura == 0 && altura == 0){
+        printf("[ERRO] PBM inválido");
+        return 0;
+    }
+    
+    return 1;
+}
+
+
 void gerarPBM(CodigoDeBarras *codigo) {
     int larguraCodigo = codigo->pxPorArea * TAM_CODIGO_DE_BARRAS;
     int larguraTotal = larguraCodigo + (2 * codigo->pxMargem);
