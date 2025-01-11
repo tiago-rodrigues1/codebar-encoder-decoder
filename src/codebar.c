@@ -42,6 +42,18 @@ void decompoeIdentificador(int identificador, int arr[TAM_IDENTIFICADOR]) {
     }
 }
 
+int compoeIdentificador(int arr[TAM_IDENTIFICADOR]) {
+    int multiplicador = 10000000, identificador = 0;
+
+    for (int i = 0; i < TAM_IDENTIFICADOR; i++) {
+        identificador += arr[i] * multiplicador;
+        
+        multiplicador /= 10;
+    }
+
+    return identificador;
+}
+
 int isDigitoVerificadorValido(int identificador) {
     int soma = 0;
     int numerosIdentificador[TAM_IDENTIFICADOR];
@@ -127,4 +139,42 @@ void getBinario(int identificador, char stringBinario[TAM_CODIGO_DE_BARRAS]) {
     strcat(codigoDeBarras, marcadorInicioFim);
 
     strcpy(stringBinario, codigoDeBarras);
+}
+
+int getDecimal(char stringBinario[TAM_CODIGO_DE_BARRAS]) {
+    int tamanhoBinario = 7, contador = 0;
+    int posicaoMarcadorCentral = (TAM_CODIGO_DE_BARRAS - 1) / 2;
+    int arrIdentificador[TAM_IDENTIFICADOR];
+
+    for (int i = 3; i < posicaoMarcadorCentral - 2; i += tamanhoBinario) {
+        char binario[TAM_IDENTIFICADOR];
+        strncpy(binario, &stringBinario[i], tamanhoBinario);
+        
+        binario[TAM_IDENTIFICADOR - 1] = '\0';
+
+        for (int j = 0; j < 10; j++) {
+            if (strcmp(tabelaLeftCode[j], binario) == 0) {
+                arrIdentificador[contador] = j;
+                contador += 1;
+                break;
+            }
+        }
+    }
+
+    for (int i = posicaoMarcadorCentral + 3; i < TAM_CODIGO_DE_BARRAS - 3; i += tamanhoBinario) {
+        char binario[TAM_IDENTIFICADOR];
+        strncpy(binario, &stringBinario[i], tamanhoBinario);
+        
+        binario[TAM_IDENTIFICADOR - 1] = '\0';
+
+        for (int j = 0; j < 10; j++) {
+            if (strcmp(tabelaRightCode[j], binario) == 0) {
+                arrIdentificador[contador] = j;
+                contador += 1;
+                break;
+            }
+        }
+    }
+
+    return compoeIdentificador(arrIdentificador);
 }
