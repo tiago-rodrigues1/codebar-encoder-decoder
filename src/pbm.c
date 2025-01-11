@@ -21,7 +21,7 @@ int arquivoExiste(char *path) {
 int pbmValido(char *path){
     FILE *arquivo;
     arquivo = fopen(path, "r");
-    char *tipo, *stringLargura, *stringAltura;
+    char *tipo = "", *stringLargura = "", *stringAltura = "";
     
     fscanf(arquivo, "%s", tipo);
     fscanf(arquivo, "%s %s", stringLargura, stringAltura);
