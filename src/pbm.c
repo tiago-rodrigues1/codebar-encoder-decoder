@@ -18,25 +18,21 @@ int arquivoExiste(char *path) {
     return existe;
 }
 
-int pbmValido(char *path){
+int pbmValido(char *path) {
     FILE *arquivo;
     arquivo = fopen(path, "r");
-    char *tipo = "", *stringLargura = "", *stringAltura = "";
-    
-    fscanf(arquivo, "%s", tipo);
-    fscanf(arquivo, "%s %s", stringLargura, stringAltura);
 
-    if (strcmp(tipo,"P1") != 0){
+    char tipo[3];
+    int largura, altura;
+
+    if (fscanf(arquivo, "%2s", tipo) != 1 || strcmp(tipo, "P1") != 0) {
         printf("[ERRO] PBM inválido");
         return 0; //0 falso
     }
 
-    int largura = atoi(stringLargura);
-    int altura = atoi(stringAltura);
-    
-    if (largura == 0 && altura == 0){
+    if (fscanf(arquivo, "%d %d", &largura, &altura) != 2 || largura == 0 || altura == 0) {
         printf("[ERRO] PBM inválido");
-        return 0;
+        return 0; //0 falso
     }
     
     return 1;
