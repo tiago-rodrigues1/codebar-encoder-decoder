@@ -43,6 +43,7 @@ void gerarPBM(CodigoDeBarras *codigo) {
     int larguraCodigo = codigo->pxPorArea * TAM_CODIGO_DE_BARRAS;
     int larguraTotal = larguraCodigo + (2 * codigo->pxMargem);
     int alturaTotal = codigo->pxAltura + (2 * codigo->pxMargem);
+    char cadeia[TAM_CODIGO_DE_BARRAS + 1] = "1010000000000000000000000000000010100000000000000000000000000000101\0";
 
     FILE *pbm;
     pbm = fopen(codigo->nome, "w");
@@ -66,7 +67,12 @@ void gerarPBM(CodigoDeBarras *codigo) {
                 char *buffer;
                 buffer = calloc(codigo->pxPorArea, sizeof(char));
 
-                memset(buffer, codigo->binario[j], codigo->pxPorArea);
+                if (i > codigo->pxAltura - (codigo->pxAltura * 0.05)) {
+                    memset(buffer, cadeia[j], codigo->pxPorArea);
+                } else {
+                    memset(buffer, codigo->binario[j], codigo->pxPorArea);
+                }
+
                 fprintf(pbm, "%s", buffer);
             }
 
