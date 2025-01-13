@@ -122,4 +122,54 @@ void extrairCodigoBinario(char *path, char stringBinario[TAM_CODIGO_DE_BARRAS]) 
     binario[contador] = '\0';
 
     strcpy(stringBinario, binario);
+} 
+    
+    
+ int temCodigoDeBarras(FILE *arquivo, int *ptrLargura) {    
+    char tipo[3];
+    int larguraTotal, alturaTotal;
+
+    int isValido = 1;
+
+    if (fscanf(arquivo, "%2s", tipo) != 1 || strcmp(tipo, "P1") != 0) {
+        isValido = 0;
+    }
+
+    if (fscanf(arquivo, "%d %d", &larguraTotal, &alturaTotal) != 2 || larguraTotal == 0 || alturaTotal == 0) {
+        isValido = 0;
+    }
+
+    *ptrLargura = larguraTotal;
+    
+    if (isValido) {
+        int margem = (larguraTotal % TAM_CODIGO_DE_BARRAS) / 2;
+        int larguraReal = larguraTotal - 2 * margem;
+        int alturaReal = alturaTotal - 2 * margem;
+        int pxPorArea = (larguraReal) / TAM_CODIGO_DE_BARRAS;
+        int offset = 1 + (larguraTotal + 1) * margem;
+
+        char linhaAtual[larguraTotal];
+        char linhaOriginal[larguraTotal];
+    
+        fseek(arquivo, offset, SEEK_CUR);
+
+        for (int i = 0; i < alturaReal; i++) {
+            if (i == 0) {
+                fgets(linhaOriginal, larguraTotal, arquivo);
+            }
+
+            fgets(linhaAtual, larguraTotal, arquivo);
+
+            if (strcmp(linhaAtual, linhaOriginal) != 0) {
+                isValido = 0;
+                break;
+            }
+        }
+
+        return isValido;
+    }
+
+    
 }
+
+    
