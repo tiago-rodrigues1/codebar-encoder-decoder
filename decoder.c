@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "include/definitions.h"
 #include "include/codebar.h"
 #include "include/pbm.h"
 
@@ -10,26 +11,35 @@ void usage() {
     printf("$ ./decoder <nome_do_arquivo>\n");
 }
 
-int main() {
-    // char *path;
-    // path = argv[1];
+int main(int argc, char *argv[]) {
+    char *path;
+    path = argv[1];
 
-    // if (strcmp(argv[1], "-h") == 0 || argv[1] == NULL) {
-    //     usage();
-    //     exit(-1);
-    // }
 
-    // int x = getDecimal("1010011001001001101111010100011010101001110101000010001001110010101");
+    if (strcmp(argv[1], "-h") == 0 || argv[1] == NULL || argc == 1) {
+        usage();
+        exit(-1);
+    }
 
-    // int existe = pbmValido("codigo.pbm");
-    // pbmValido("codigo.pbm");
-    // printf("---> %d\n", existe);
+    if (arquivoExiste(path) == 0) {
+        printf("[ERRO] %s não foi encontrado\n", path);
+        exit(-1);
+    }
 
-    char stringBinario[TAM_CODIGO_DE_BARRAS];
+    CodigoDeBarras c;  
 
-    extrairCodigoBinario("tiago.pbm", stringBinario);
+    c.path = path;
+    extrairCodigoBinario(&c);
+    
+    int identificador = getDecimal(&c);
+    c.identificador = identificador;
 
-    printf("%s\n", stringBinario);
+    printf("========== EXTRAINDO CÓDIGO DE BARRAS ==========\n");
+    printf("> Identificador: %d\n", c.identificador);
+    printf("> Margem: %d\n", c.pxMargem);
+    printf("> Px por área: %d\n", c.pxPorArea);
+    printf("> Altura: %d\n", c.pxAltura);
+    printf("> Arquivo: %s\n", c.path);
 
     return 0;
 }
