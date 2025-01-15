@@ -111,9 +111,9 @@ int isIdentificadorValido(char *identificador) {
     return numIdentificador;
 }
 
-void getBinario(int identificador, char stringBinario[TAM_CODIGO_DE_BARRAS]) {
+void getBinario(CodigoDeBarras *c) {
     int numerosIdentificador[TAM_IDENTIFICADOR];
-    decompoeIdentificador(identificador, numerosIdentificador);
+    decompoeIdentificador(c->identificador, numerosIdentificador);
 
     char codigoDeBarras[TAM_CODIGO_DE_BARRAS] = "";
     char marcadorInicioFim[4] = "101\0";
@@ -140,17 +140,17 @@ void getBinario(int identificador, char stringBinario[TAM_CODIGO_DE_BARRAS]) {
     
     strcat(codigoDeBarras, marcadorInicioFim);
 
-    strcpy(stringBinario, codigoDeBarras);
+    strcpy(c->binario, codigoDeBarras);
 }
 
-int getDecimal(char stringBinario[TAM_CODIGO_DE_BARRAS]) {
+int getDecimal(CodigoDeBarras *c) {
     int tamanhoBinario = 7, contador = 0;
     int posicaoMarcadorCentral = (TAM_CODIGO_DE_BARRAS - 1) / 2;
     int arrIdentificador[TAM_IDENTIFICADOR];
 
     for (int i = 3; i < posicaoMarcadorCentral - 2; i += tamanhoBinario) {
         char binario[TAM_IDENTIFICADOR];
-        strncpy(binario, &stringBinario[i], tamanhoBinario);
+        strncpy(binario, &c->binario[i], tamanhoBinario);
         
         binario[TAM_IDENTIFICADOR - 1] = '\0';
 
@@ -165,7 +165,7 @@ int getDecimal(char stringBinario[TAM_CODIGO_DE_BARRAS]) {
 
     for (int i = posicaoMarcadorCentral + 3; i < TAM_CODIGO_DE_BARRAS - 3; i += tamanhoBinario) {
         char binario[TAM_IDENTIFICADOR];
-        strncpy(binario, &stringBinario[i], tamanhoBinario);
+        strncpy(binario, &c->binario[i], tamanhoBinario);
         
         binario[TAM_IDENTIFICADOR - 1] = '\0';
 

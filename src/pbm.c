@@ -46,7 +46,7 @@ void gerarPBM(CodigoDeBarras *codigo) {
     int alturaTotal = codigo->pxAltura + (2 * codigo->pxMargem);
 
     FILE *pbm;
-    pbm = fopen(codigo->nome, "w");
+    pbm = fopen(codigo->path, "w");
 
     fprintf(pbm, "%s\n%d %d\n", "P1", larguraTotal, alturaTotal);
 
@@ -80,14 +80,14 @@ void gerarPBM(CodigoDeBarras *codigo) {
     fclose(pbm);
 }
 
-void extrairCodigoBinario(char *path, char stringBinario[TAM_CODIGO_DE_BARRAS]) {
+void extrairCodigoBinario(CodigoDeBarras *c) {
     FILE *arquivo;
-    arquivo = fopen(path, "r");
+    arquivo = fopen(c->path, "r");
 
     int larguraTotal = 0, alturaTotal = 0;
 
     if (pbmValido(arquivo, &larguraTotal, &alturaTotal) == 0) {
-        printf("[ERRO] %s não é um arquivo PBM válido", path);
+        printf("[ERRO] %s não é um arquivo PBM válido", c->path);
 		exit(-1);
     }
 
@@ -114,14 +114,18 @@ void extrairCodigoBinario(char *path, char stringBinario[TAM_CODIGO_DE_BARRAS]) 
     binario[contador] = '\0';
 
 	if (temCodigoDeBarras(arquivo, linha, binario,larguraTotal, alturaReal) == 0) {
-		printf("[ERRO] %s não possui um código de barras em seu conteúdo", path);
+		printf("[ERRO] %s não possui um código de barras em seu conteúdo", c->path);
 		fclose(arquivo);
 		exit(-1);
 	}
 
     fclose(arquivo);
 
-    strcpy(stringBinario, binario);
+    c->pxAltura = alturaReal;
+    c->pxMargem = margem;
+    c->pxPorArea = pxPorArea;
+    
+    strcpy(c->binario, binario);
 
     free(binario);
 } 
