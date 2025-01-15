@@ -66,20 +66,18 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    printf("%d\n", c.identificador);
-    printf("%d\n", c.pxMargem);
-    printf("%d\n", c.pxPorArea);
-    printf("%d\n", c.pxAltura);
-    printf("%s\n", c.nome);
+    printf("========== GERANDO CÓDIGO DE BARRAS ==========\n");
+    printf("> Identificador: %d\n", c.identificador);
+    printf("> Margem: %d\n", c.pxMargem);
+    printf("> Px por área: %d\n", c.pxPorArea);
+    printf("> Altura: %d\n", c.pxAltura);
+    printf("> Nome do arquivo: %s\n", c.nome);
     
     char binario[TAM_CODIGO_DE_BARRAS];
     getBinario(c.identificador, binario);
     strcpy(c.binario, binario);
 
-    printf("%s\n", binario);
-
     gerarPBM(&c);
     
     return 0;
-
 }
