@@ -11,7 +11,7 @@ void usage() {
     printf("-m............Margem lateral, em px (opcional)\n");
     printf("-p............Pixel por área do código (opcional)\n");
     printf("-a............Altura do códgido em pixels (opcional)\n");
-    printf("-n............Nome do arquivo do código de barras (opcional)\n");
+    printf("-f............Caminho do arquivo do código de barras (opcional)\n");
     printf("-h............Ver modo de uso (opcional)\n");
 }
 
@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
     c.pxMargem = 8;
     c.pxPorArea = 3;
     c.pxAltura = 180;
-    c.nome = "codigo.pbm";
+    c.path = "codigo.pbm";
 
     if (strcmp(argv[1], "-h") == 0) {
         usage();
@@ -55,8 +55,8 @@ int main(int argc, char* argv[]) {
             i++;
         }
 
-        if (strcmp(argv[i], "-n") == 0 && i + 1 < argc) {
-            c.nome = argv[i + 1];
+        if (strcmp(argv[i], "-f") == 0 && i + 1 < argc) {
+            c.path = argv[i + 1];
             i++;
         }
 
@@ -71,12 +71,9 @@ int main(int argc, char* argv[]) {
     printf("> Margem: %d\n", c.pxMargem);
     printf("> Px por área: %d\n", c.pxPorArea);
     printf("> Altura: %d\n", c.pxAltura);
-    printf("> Nome do arquivo: %s\n", c.nome);
+    printf("> Arquivo: %s\n", c.path);
     
-    char binario[TAM_CODIGO_DE_BARRAS];
-    getBinario(c.identificador, binario);
-    strcpy(c.binario, binario);
-
+    getBinario(&c);
     gerarPBM(&c);
     
     return 0;

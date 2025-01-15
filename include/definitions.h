@@ -13,7 +13,7 @@ typedef struct codigo {
     int pxMargem;
     int pxPorArea;
     int pxAltura;
-    char *nome;
+    char *path;
     char binario[TAM_CODIGO_DE_BARRAS];
 } CodigoDeBarras;
 #endif
