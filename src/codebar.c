@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#include "../include/definitions.h"
 #include "../include/codebar.h"
 
 char tabelaRightCode[10][8] = {
