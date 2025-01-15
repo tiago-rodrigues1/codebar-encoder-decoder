@@ -1,6 +1,8 @@
 #include "./definitions.h"
 
+void decompoeIdentificador(int identificador, int arr[TAM_IDENTIFICADOR]);
+int compoeIdentificador(int arr[TAM_IDENTIFICADOR]);
 int isDigitoVerificadorValido(int identificador);
 int isIdentificadorValido(char *identificador);
-void getBinario(int identificador, char stringBinario[TAM_CODIGO_DE_BARRAS]);
-int getDecimal (char stringBinario[TAM_CODIGO_DE_BARRAS]);
+void getBinario(CodigoDeBarras *c);
+int getDecimal(CodigoDeBarras *c);
