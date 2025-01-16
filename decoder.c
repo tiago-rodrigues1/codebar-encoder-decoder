@@ -16,7 +16,13 @@ int main(int argc, char *argv[]) {
     path = argv[1];
 
 
-    if (strcmp(argv[1], "-h") == 0 || argv[1] == NULL || argc == 1) {
+    if (argc == 1 || argv[1] == NULL) {
+        printf("[ERRO] Você precisa informar o caminho de um arquivo\n");
+        usage();
+        exit(-1);
+    }
+
+    if (strcmp(argv[1], "-h") == 0) {
         usage();
         exit(-1);
     }
