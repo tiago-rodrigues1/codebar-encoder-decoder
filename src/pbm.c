@@ -114,7 +114,7 @@ void extrairCodigoBinario(CodigoDeBarras *c) {
     binario[contador] = '\0';
 
 	if (temCodigoDeBarras(arquivo, linha, binario,larguraTotal, alturaReal) == 0) {
-		printf("[ERRO] %s não possui um código de barras em seu conteúdo", c->path);
+		printf("[ERRO] %s não possui um código de barras em seu conteúdo\n", c->path);
 		fclose(arquivo);
 		exit(-1);
 	}
@@ -139,8 +139,6 @@ int temCodigoDeBarras(FILE *arquivo, char *linhaBase, char stringBinario[TAM_COD
 		fgetc(arquivo);
 
 		if (strcmp(linhaAtual, linhaBase) != 0) {
-			printf("a)%s\nb)%s\n", linhaBase, linhaAtual);
-			printf("%d\n", i);
 			return 0;
 		}
     }
