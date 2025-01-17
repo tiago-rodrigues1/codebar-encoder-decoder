@@ -29,6 +29,13 @@ To install and set up this project, follow these steps:
     ```sh
     make
     ```
+   If you don't have Make installed:
+   ```sh
+   gcc src/codebar.c src/pbm.c decoder.c -o decoder
+   ```
+   ```sh
+   gcc src/codebar.c src/pbm.c encoder.c -o encoder
+   ```
 
 ## Usage
 To use the encoder and decoder, you can run the compiled executable files. Here are some examples:
