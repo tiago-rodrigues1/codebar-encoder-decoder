@@ -41,11 +41,7 @@ int main(int argc, char *argv[]) {
     c.identificador = identificador;
 
     printf("========== EXTRAINDO CÓDIGO DE BARRAS ==========\n");
-    printf("> Identificador: %d\n", c.identificador);
-    printf("> Margem: %d\n", c.pxMargem);
-    printf("> Px por área: %d\n", c.pxPorArea);
-    printf("> Altura: %d\n", c.pxAltura);
-    printf("> Arquivo: %s\n", c.path);
+    printCodigoDeBarras(&c);
 
     return 0;
 }

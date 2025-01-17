@@ -180,3 +180,11 @@ int getDecimal(CodigoDeBarras *c) {
 
     return compoeIdentificador(arrIdentificador);
 }
+
+void printCodigoDeBarras(CodigoDeBarras *c) {
+    printf("> Identificador: %d\n", c->identificador);
+    printf("> Margem: %d\n", c->pxMargem);
+    printf("> Px por área: %d\n", c->pxPorArea);
+    printf("> Altura: %d\n", c->pxAltura);
+    printf("> Arquivo: %s\n", c->path);
+}
