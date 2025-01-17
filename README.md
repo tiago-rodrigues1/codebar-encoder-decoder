@@ -35,7 +35,7 @@ To use the encoder and decoder, you can run the compiled executable files. Here 
 
 ### Encoding
 ```sh
-./encoder <identifier> -m <margin> -p <area_size> -a <height> -n <filename>
+./encoder <identifier> -m <margin> -p <area_size> -a <height> -f <filename>
 ```
 
 ### Decoding
