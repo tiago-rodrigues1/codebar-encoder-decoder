@@ -29,7 +29,7 @@ int main(int argc, char* argv[]) {
         usage();
         exit(-1);
     } else {
-        int resultado = isIdentificadorValido(argv[1]);
+        int resultado = isIdentificadorValido(argv[1]); //quando é válido retorna o próprio identificador
 
         if (resultado == 0) {
             usage();
@@ -38,8 +38,8 @@ int main(int argc, char* argv[]) {
             c.identificador = resultado;
         }
     }
-
-    for (int i = 2; i < argc; i++) {
+    //primeiro parametro é o nome do arquivo por isso o 2
+    for (int i = 2; i < argc; i++) { //argc: quantos parametros o usuario digitou v: quais foram
         if (strcmp(argv[i], "-m") == 0 && i + 1 < argc) {
             c.pxMargem = atoi(argv[i + 1]);
             i++;
@@ -81,9 +81,9 @@ int main(int argc, char* argv[]) {
     }
 
     printf("\n========== GERANDO CÓDIGO DE BARRAS ==========\n");
-    printCodigoDeBarras(&c);
-    getBinario(&c);
-    gerarPBM(&c);
+    printCodigoDeBarras(&c); //printa os párametros la de cima
+    getBinario(&c); //transforma de decimal para binario
+    gerarPBM(&c); //gera o arquivo 
     
     return 0;
 }
