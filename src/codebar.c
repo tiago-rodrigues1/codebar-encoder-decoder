@@ -91,20 +91,20 @@ int isIdentificadorValido(char *identificador) {
 
     for (i = 0; identificador[i] != '\0'; i++) {
         if (!isdigit(identificador[i])) { 
-            printf("[ERRO] Todos os carecteres do identificador devem ser numéricos\n");
+            printf(ANSI_COLOR_RED "[ERRO] Todos os carecteres do identificador devem ser numéricos" ANSI_COLOR_RESET "\n");
             return 0;
         }
     }
 
     if (i != TAM_IDENTIFICADOR) {
-        printf("[ERRO] O identificador deve ter exatamente 8 dígitos\n");
+        printf(ANSI_COLOR_RED "[ERRO] O identificador deve ter exatamente 8 dígitos" ANSI_COLOR_RESET "\n");
         return 0;
     }
 
     int numIdentificador = atoi(identificador);
 
     if (!isDigitoVerificadorValido(numIdentificador)) {
-        printf("[ERRO] O dígito verificador não é válido\n");
+        printf(ANSI_COLOR_RED "[ERRO] O dígito verificador não é válido" ANSI_COLOR_RESET "\n");
         return 0;
     }
     

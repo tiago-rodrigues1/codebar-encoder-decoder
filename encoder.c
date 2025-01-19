@@ -7,14 +7,13 @@
 
 void usage() {
     printf("\nModo de uso:\n");
-    printf("\n$ ./encoder <identificador> -m <margem_lateral> -p <pixel_por_area> -a <altura_do_codigo> -n <nome_do_arquivo> \n\n");
+    printf(ANSI_COLOR_BLUE "\n$ ./encoder <identificador> -m <margem_lateral> -p <pixel_por_area> -a <altura_do_codigo> -n <nome_do_arquivo>" ANSI_COLOR_RESET "\n\n");
     printf("-m............Margem lateral, em px (opcional)\n");
     printf("-p............Pixel por área do código (opcional)\n");
     printf("-a............Altura do códgido em pixels (opcional)\n");
     printf("-f............Caminho do arquivo do código de barras (opcional)\n");
     printf("-h............Ver modo de uso (opcional)\n");
 }
-
 
 int main(int argc, char* argv[]) {
     CodigoDeBarras c;
@@ -86,20 +85,20 @@ int main(int argc, char* argv[]) {
     }
 
     if (arquivoExiste(c.path)) {
-        printf("[ATENÇÃO] %s já existe\n\n", c.path);
+        printf(ANSI_COLOR_YELLOW "[ATENÇÃO] %s já existe" ANSI_COLOR_RESET "\n\n", c.path);
 
         char podeSobrescrever;
         printf("> Gostaria de sobrescrever ? [Y/N]: ");
         scanf("%c", &podeSobrescrever);
 
         if (podeSobrescrever == 'n' || podeSobrescrever == 'N') {
-            printf("[ERRO] arquivo resultante já existe\n");
+            printf(ANSI_COLOR_RED "[ERRO] arquivo resultante já existe" ANSI_COLOR_RESET "\n");
             exit(-1);
         }
 
     }
 
-    printf("\n========== GERANDO CÓDIGO DE BARRAS ==========\n");
+    printf(ANSI_COLOR_GREEN "\n========== GERANDO CÓDIGO DE BARRAS ==========" ANSI_COLOR_RESET "\n");
     printCodigoDeBarras(&c);  //printa os párametros la de cima
     converteDecimalParaBinario(&c); //transforma de decimal para binario
     gerarPBM(&c); //gera o arquivo 

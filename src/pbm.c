@@ -90,7 +90,7 @@ void extraiBinarioDoPBM(CodigoDeBarras *c) {
     int larguraTotal = 0, alturaTotal = 0;
 
     if (pbmValido(arquivo, &larguraTotal, &alturaTotal) == 0) {
-        printf("[ERRO] %s não é um arquivo PBM válido", c->path);
+        printf(ANSI_COLOR_RED "[ERRO] %s não é um arquivo PBM válido" ANSI_COLOR_RESET "\n", c->path);
 		exit(-1);
     }
 
@@ -117,7 +117,7 @@ void extraiBinarioDoPBM(CodigoDeBarras *c) {
     binario[contador] = '\0';
 
 	if (temCodigoDeBarras(arquivo, linha, binario,larguraTotal, alturaReal) == 0) {
-		printf("[ERRO] %s não possui um código de barras em seu conteúdo\n", c->path);
+		printf(ANSI_COLOR_RED "[ERRO] %s não possui um código de barras em seu conteúdo\n" ANSI_COLOR_RESET "\n", c->path);
 		fclose(arquivo);
 		exit(-1);
 	}
