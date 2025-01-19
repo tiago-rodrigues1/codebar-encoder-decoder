@@ -53,3 +53,7 @@ To use the encoder and decoder, you can run the compiled executable files. Here 
 ## Contributors
 - Tiago Rodrigues
 - Déborah Macedo
+
+
+## Slides
+     https://www.canva.com/design/DAGcNzIgSfs/BPgxBzUcDu9PHZhwkWodbg/edit?utm_content=DAGcNzIgSfs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton

@@ -7,7 +7,7 @@
 
 void usage() {
     printf("\nModo de uso:\n");
-    printf(ANSI_COLOR_BLUE "\n$ ./encoder <identificador> -m <margem_lateral> -p <pixel_por_area> -a <altura_do_codigo> -n <nome_do_arquivo>" ANSI_COLOR_RESET "\n\n");
+    printf(ANSI_COLOR_BLUE "\n$ ./encoder <identificador> -m <margem_lateral> -p <pixel_por_area> -a <altura_do_codigo> -f <nome_do_arquivo>" ANSI_COLOR_RESET "\n\n");
     printf("-m............Margem lateral, em px (opcional)\n");
     printf("-p............Pixel por área do código (opcional)\n");
     printf("-a............Altura do códgido em pixels (opcional)\n");
