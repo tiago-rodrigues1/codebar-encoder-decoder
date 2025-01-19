@@ -36,8 +36,8 @@ int main(int argc, char *argv[]) {
 
     c.path = path;
     
-    extrairCodigoBinario(&c);
-    getDecimal(&c);
+    extraiBinarioDoPBM(&c);
+    converteBinarioParaDecimal(&c);
 
     printf("========== EXTRAINDO CÓDIGO DE BARRAS ==========\n");
     printCodigoDeBarras(&c);

@@ -75,7 +75,7 @@ int main(int argc, char* argv[]) {
             if (strlen(valor) > 0) {
                 c.path = argv[i + 1];
             }
-            
+
             i++;
         }
 
@@ -100,8 +100,8 @@ int main(int argc, char* argv[]) {
     }
 
     printf("\n========== GERANDO CÓDIGO DE BARRAS ==========\n");
-    printCodigoDeBarras(&c); //printa os párametros la de cima
-    getBinario(&c); //transforma de decimal para binario
+    printCodigoDeBarras(&c);  //printa os párametros la de cima
+    converteDecimalParaBinario(&c); //transforma de decimal para binario
     gerarPBM(&c); //gera o arquivo 
     
     return 0;

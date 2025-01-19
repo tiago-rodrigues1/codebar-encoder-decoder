@@ -111,7 +111,7 @@ int isIdentificadorValido(char *identificador) {
     return numIdentificador;
 }
 
-void getBinario(CodigoDeBarras *c) {
+void converteDecimalParaBinario(CodigoDeBarras *c) {
     int numerosIdentificador[TAM_IDENTIFICADOR];
     decompoeIdentificador(c->identificador, numerosIdentificador);
 
@@ -143,7 +143,7 @@ void getBinario(CodigoDeBarras *c) {
     strcpy(c->binario, codigoDeBarras);
 }
 
-int getDecimal(CodigoDeBarras *c) {
+int converteBinarioParaDecimal(CodigoDeBarras *c) {
     int tamanhoBinario = 7, contador = 0;
     int posicaoMarcadorCentral = (TAM_CODIGO_DE_BARRAS - 1) / 2;
     int arrIdentificador[TAM_IDENTIFICADOR];

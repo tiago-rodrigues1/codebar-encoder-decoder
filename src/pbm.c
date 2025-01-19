@@ -82,7 +82,8 @@ void gerarPBM(CodigoDeBarras *codigo) { //Tiago
     fclose(pbm);
 }
 
-void extrairCodigoBinario(CodigoDeBarras *c) { //tiago
+// Tiago
+void extraiBinarioDoPBM(CodigoDeBarras *c) {
     FILE *arquivo;
     arquivo = fopen(c->path, "r");
 
