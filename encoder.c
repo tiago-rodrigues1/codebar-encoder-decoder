@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
         }
 
         if (strcmp(argv[i], "-f") == 0 && i + 1 < argc) {
-            char *valor;
+            char *valor = "";
 
             if (strlen(valor) > 0) {
                 c.path = argv[i + 1];
