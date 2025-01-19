@@ -6,7 +6,7 @@
 #include "include/codebar.h"
 #include "include/pbm.h"
 
-void usage() {
+void usage() { //deborah
     printf("Modo de uso:\n");
     printf("$ ./decoder <nome_do_arquivo>\n");
 }

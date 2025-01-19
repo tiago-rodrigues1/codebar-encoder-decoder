@@ -17,7 +17,7 @@ int arquivoExiste(char *path) {
     }
     
     return existe;
-}
+} 
 
 int pbmValido(FILE *arquivo, int *ptrLargura, int *ptrAltura) {
     char tipo[3];
@@ -42,7 +42,7 @@ int pbmValido(FILE *arquivo, int *ptrLargura, int *ptrAltura) {
 }
 
 
-void gerarPBM(CodigoDeBarras *codigo) {
+void gerarPBM(CodigoDeBarras *codigo) { //Tiago
     int larguraCodigo = codigo->pxPorArea * TAM_CODIGO_DE_BARRAS;
     int larguraTotal = larguraCodigo + (2 * codigo->pxMargem);
     int alturaTotal = codigo->pxAltura + (2 * codigo->pxMargem);
@@ -82,7 +82,7 @@ void gerarPBM(CodigoDeBarras *codigo) {
     fclose(pbm);
 }
 
-void extrairCodigoBinario(CodigoDeBarras *c) {
+void extrairCodigoBinario(CodigoDeBarras *c) { //tiago
     FILE *arquivo;
     arquivo = fopen(c->path, "r");
 
@@ -104,13 +104,13 @@ void extrairCodigoBinario(CodigoDeBarras *c) {
     fseek(arquivo, offset, SEEK_CUR);
     fgets(linha, larguraTotal + 1, arquivo);
 
-    char *binario = malloc(sizeof(char));
+    char *binario = malloc(sizeof(char)); //
     int contador = 0;
 
-    for (int i = margem; i + pxPorArea <= larguraTotal - margem; i += pxPorArea) {
+    for (int i = margem; i + pxPorArea <= larguraTotal - margem; i += pxPorArea) { //le a primeira linha dps da margem
         binario[contador] = linha[i];
         contador += 1;
-        binario = realloc(binario, sizeof(char) * (contador + 1));
+        binario = realloc(binario, sizeof(char) * (contador + 1)); //
     }
 
     binario[contador] = '\0';
@@ -132,7 +132,7 @@ void extrairCodigoBinario(CodigoDeBarras *c) {
     free(binario);
 } 
     
-int temCodigoDeBarras(FILE *arquivo, char *linhaBase, char stringBinario[TAM_CODIGO_DE_BARRAS], int larguraTotal, int alturaReal) {  
+int temCodigoDeBarras(FILE *arquivo, char *linhaBase, char stringBinario[TAM_CODIGO_DE_BARRAS], int larguraTotal, int alturaReal) { //ve se todas as linhas sao iguais a primeira e ve se tem os marcadores 
     char linhaAtual[larguraTotal + 2];
 
 	fgetc(arquivo);
@@ -154,7 +154,7 @@ int temCodigoDeBarras(FILE *arquivo, char *linhaBase, char stringBinario[TAM_COD
 
 	if (temMarcadorInicial == 0 || temMarcadorFinal == 0 || temMarcadorCentral == 0) {
 		return 0;
-	}
+	} 
 
 	return 1;
 }
