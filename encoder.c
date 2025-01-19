@@ -41,22 +41,41 @@ int main(int argc, char* argv[]) {
     //primeiro parametro é o nome do arquivo por isso o 2
     for (int i = 2; i < argc; i++) { //argc: quantos parametros o usuario digitou v: quais foram
         if (strcmp(argv[i], "-m") == 0 && i + 1 < argc) {
-            c.pxMargem = atoi(argv[i + 1]);
+            int valor = atoi(argv[i + 1]);
+            if (valor != 0) {
+
+                c.pxMargem = valor;
+            }
+
             i++;
         }
 
         if (strcmp(argv[i], "-p") == 0 && i + 1 < argc) {
-            c.pxPorArea = atoi(argv[i + 1]);
+            int valor = atoi(argv[i + 1]);
+            if (valor != 0) {
+
+                c.pxPorArea = valor;
+            }
+
             i++;
         }
 
         if (strcmp(argv[i], "-a") == 0 && i + 1 < argc) {
-            c.pxAltura = atoi(argv[i + 1]);
+            int valor = atoi(argv[i + 1]);
+            if (valor != 0) {
+                c.pxAltura = valor;
+            }
+
             i++;
         }
 
         if (strcmp(argv[i], "-f") == 0 && i + 1 < argc) {
-            c.path = argv[i + 1];
+            char *valor;
+
+            if (strlen(valor) > 0) {
+                c.path = argv[i + 1];
+            }
+            
             i++;
         }
 
