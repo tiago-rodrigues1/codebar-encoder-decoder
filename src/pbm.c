@@ -33,8 +33,10 @@ int pbmValido(FILE *arquivo, int *ptrLargura, int *ptrAltura) {
         isValido = 0;
     }
 
-    *ptrLargura = largura;
-	*ptrAltura = altura;
+    if (isValido) {
+        *ptrLargura = largura;
+	    *ptrAltura = altura;
+    }
     
     return isValido;
 }
