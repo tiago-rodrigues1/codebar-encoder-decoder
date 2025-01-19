@@ -178,7 +178,9 @@ int getDecimal(CodigoDeBarras *c) {
         }
     }
 
-    return compoeIdentificador(arrIdentificador);
+    c->identificador = compoeIdentificador(arrIdentificador);
+
+    return 1;
 }
 
 void printCodigoDeBarras(CodigoDeBarras *c) {
